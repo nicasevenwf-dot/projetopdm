@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="projetopdm.AltDisciplinaPage"
+    Title="Alterar Disciplina">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="30"
+            Spacing="15">
+
+            <Label
+                Text="ALTERAR DISCIPLINA"
+                FontSize="24"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Margin="0,10,0,20" />
+
+            <!-- NOME -->
+
+            <Label
+                Text="Nome"
+                FontAttributes="Bold" />
+
+            <Border
+                Stroke="LightGray"
+                StrokeThickness="1"
+                Padding="5">
+
+                <Entry
+                    x:Name="txtNome"
+                    Placeholder="Nome da disciplina" />
+
+            </Border>
+
+
+            <!-- SIGLA -->
+
+            <Label
+                Text="Sigla"
+                FontAttributes="Bold"
+                Margin="0,10,0,0" />
+
+            <Border
+                Stroke="LightGray"
+                StrokeThickness="1"
+                Padding="5">
+
+                <Entry
+                    x:Name="txtSigla"
+                    Placeholder="Sigla da disciplina" />
+
+            </Border>
+
+
+            <!-- CURSO -->
+
+            <Label
+                Text="Curso"
+                FontAttributes="Bold"
+                Margin="0,10,0,0" />
+
+            <Border
+                Stroke="LightGray"
+                StrokeThickness="1"
+                Padding="5">
+
+                <Picker
+                x:Name="pickerCurso"
+                Title="Selecione o curso"
+                ItemDisplayBinding="{Binding CurNome}" />
+
+            </Border>
+
+
+            <!-- OBSERVAÇÕES -->
+
+            <Label
+                Text="Observações"
+                FontAttributes="Bold"
+                Margin="0,10,0,0" />
+
+            <Border
+                Stroke="LightGray"
+                StrokeThickness="1"
+                Padding="5">
+
+                <Editor
+                    x:Name="txtObservacoes"
+                    Placeholder="Observações da disciplina"
+                    HeightRequest="100" />
+
+            </Border>
+
+
+            <Button
+                Text="SALVAR ALTERAÇÕES"
+                Margin="0,20,0,0"
+                Clicked="AlterarDisciplina" />
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>

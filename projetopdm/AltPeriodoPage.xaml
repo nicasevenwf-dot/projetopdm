@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="projetopdm.AltPeriodoPage"
+    Title="Alterar Período">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="30"
+            Spacing="15">
+
+            <Label
+                Text="ALTERAR PERÍODO"
+                FontSize="24"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Margin="0,10,0,20" />
+
+            <!-- NOME -->
+            <Label
+                Text="Nome"
+                FontAttributes="Bold" />
+
+            <Border
+                Stroke="LightGray"
+                StrokeThickness="1"
+                Padding="5">
+
+                <Entry
+                    x:Name="txtNome"
+                    Placeholder="Nome do período" />
+
+            </Border>
+
+            <!-- SIGLA -->
+            <Label
+                Text="Sigla"
+                FontAttributes="Bold"
+                Margin="0,10,0,0" />
+
+            <Border
+                Stroke="LightGray"
+                StrokeThickness="1"
+                Padding="5">
+
+                <Entry
+                    x:Name="txtSigla"
+                    Placeholder="Sigla do período" />
+
+            </Border>
+
+            <Button
+                Text="SALVAR ALTERAÇÕES"
+                Margin="0,20,0,0"
+                Clicked="AlterarPeriodo" />
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>
