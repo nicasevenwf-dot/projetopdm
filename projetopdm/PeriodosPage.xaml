@@ -7,150 +7,157 @@
     x:Class="projetopdm.PeriodosPage"
     Title="Períodos"
     BackgroundColor="White">
-    
+
     <Grid>
 
-    <Grid
-        Padding="24,20"
-        RowSpacing="16"
-        RowDefinitions="Auto,Auto,Auto,*,Auto">
+        <Grid
+            Padding="24,20"
+            RowSpacing="16"
+            RowDefinitions="Auto,Auto,Auto,*,Auto">
 
-        <Label
-            Grid.Row="0"
-            Text="PERÍODOS"
-            FontSize="26"
-            FontAttributes="Bold"
-            TextColor="#1F2A44"
-            HorizontalOptions="Center" />
+            <Label
+                Grid.Row="0"
+                Text="PERÍODOS"
+                FontSize="26"
+                FontAttributes="Bold"
+                TextColor="#1F2A44"
+                HorizontalOptions="Center" />
 
-        <Label
-            Grid.Row="1"
-            Text="Períodos cadastrados"
-            FontSize="18"
-            FontAttributes="Bold"
-            TextColor="#1F2A44" />
+            <Label
+                Grid.Row="1"
+                Text="Períodos cadastrados"
+                FontSize="18"
+                FontAttributes="Bold"
+                TextColor="#1F2A44" />
 
-        <VerticalStackLayout Grid.Row="2" Spacing="0">
+            <VerticalStackLayout Grid.Row="2" Spacing="0">
 
-            <SearchBar
-x:Name="searchBar"
-Placeholder="Pesquisar por nome ou sigla"
-SearchIconColor="Black"
-TextChanged="OnPesquisarTextChanged"
-SearchButtonPressed="OnPesquisarTextChanged" />
+                <SearchBar
+                    x:Name="searchBar"
+                    Placeholder="Pesquisar por nome, sigla ou data"
+                    SearchIconColor="Black"
+                    TextChanged="OnPesquisarTextChanged"
+                    SearchButtonPressed="OnPesquisarTextChanged" />
 
-            <BoxView
-HeightRequest="2"
-Color="black"
-  Margin="55,0,3,0" />
+                <BoxView
+                    HeightRequest="2"
+                    Color="black"
+                    Margin="55,0,3,0" />
 
-        </VerticalStackLayout>
-        <CollectionView
-            Grid.Row="3"
-            x:Name="listaPeriodos"
-            SelectionMode="None">
+            </VerticalStackLayout>
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
+            <CollectionView
+                Grid.Row="3"
+                x:Name="listaPeriodos"
+                SelectionMode="None">
 
-                    <Grid Padding="0,6">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
 
-                        <Border
-                            BackgroundColor="White"
-                            Stroke="#E5E7EB"
-                            StrokeThickness="1"
-                            Padding="0">
+                        <Grid Padding="0,6">
 
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="14" />
-                            </Border.StrokeShape>
+                            <Border
+                                BackgroundColor="White"
+                                Stroke="#E5E7EB"
+                                StrokeThickness="1"
+                                Padding="0">
 
-                            <Border.Shadow>
-                                <Shadow
-                                    Brush="Black"
-                                    Opacity="0.08"
-                                    Radius="8"
-                                    Offset="0,3" />
-                            </Border.Shadow>
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="14" />
+                                </Border.StrokeShape>
 
-                            <Grid ColumnDefinitions="6,*">
+                                <Border.Shadow>
+                                    <Shadow
+                                        Brush="Black"
+                                        Opacity="0.08"
+                                        Radius="8"
+                                        Offset="0,3" />
+                                </Border.Shadow>
 
-                                <BoxView
-                                    Grid.Column="0"
-                                    Color="#4F46E5" />
+                                <Grid ColumnDefinitions="6,*">
 
-                                <VerticalStackLayout
-                                    Grid.Column="1"
-                                    Padding="16,14"
-                                    Spacing="10">
+                                    <BoxView
+                                        Grid.Column="0"
+                                        Color="#4F46E5" />
 
-                                    <Grid ColumnDefinitions="*,Auto">
-                                        <Label
-                                            Grid.Column="0"
-                                            Text="{Binding PerNome}"
-                                            FontSize="18"
-                                            FontAttributes="Bold"
-                                            TextColor="#1F2A44"
-                                            LineBreakMode="TailTruncation"
-                                            VerticalOptions="Center" />
+                                    <VerticalStackLayout
+                                        Grid.Column="1"
+                                        Padding="16,14"
+                                        Spacing="10">
 
-                                        <Border
-                                            Grid.Column="1"
-                                            BackgroundColor="#EEF2FF"
-                                            StrokeThickness="0"
-                                            Padding="10,4"
-                                            VerticalOptions="Center">
-                                            <Border.StrokeShape>
-                                                <RoundRectangle CornerRadius="10" />
-                                            </Border.StrokeShape>
+                                        <Grid ColumnDefinitions="*,Auto">
                                             <Label
-                                                Text="{Binding PerSigla}"
-                                                FontSize="12"
+                                                Grid.Column="0"
+                                                Text="{Binding PerNome}"
+                                                FontSize="18"
                                                 FontAttributes="Bold"
-                                                TextColor="#4F46E5" />
-                                        </Border>
-                                    </Grid>
+                                                TextColor="#1F2A44"
+                                                LineBreakMode="TailTruncation"
+                                                VerticalOptions="Center" />
 
-                                    <HorizontalStackLayout Spacing="10">
+                                            <Border
+                                                Grid.Column="1"
+                                                BackgroundColor="#EEF2FF"
+                                                StrokeThickness="0"
+                                                Padding="10,4"
+                                                VerticalOptions="Center">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="10" />
+                                                </Border.StrokeShape>
+                                                <Label
+                                                    Text="{Binding PerSigla}"
+                                                    FontSize="12"
+                                                    FontAttributes="Bold"
+                                                    TextColor="#4F46E5" />
+                                            </Border>
+                                        </Grid>
 
-                                        <Button
-                                            Text="Alterar"
-                                            Clicked="AbrirAlterarPeriodo"
-                                            CommandParameter="{Binding .}"
-                                            BackgroundColor="DarkOrange"
-                                            TextColor="White"
-                                            CornerRadius="10" />
+                                        <!-- NOVO: exibe a data -->
+                                        <Label
+                                            Text="{Binding PerData, StringFormat='Data: {0}'}"
+                                            FontSize="14"
+                                            TextColor="#6B7280" />
 
-                                        <Button
-                                            Text="Excluir"
-                                            Clicked="ExcluirPeriodo"
-                                            CommandParameter="{Binding .}"
-                                            BackgroundColor="Red"
-                                            TextColor="White"
-                                            CornerRadius="10" />
+                                        <HorizontalStackLayout Spacing="10">
 
-                                    </HorizontalStackLayout>
+                                            <Button
+                                                Text="Alterar"
+                                                Clicked="AbrirAlterarPeriodo"
+                                                CommandParameter="{Binding .}"
+                                                BackgroundColor="DarkOrange"
+                                                TextColor="White"
+                                                CornerRadius="10" />
 
-                                </VerticalStackLayout>
-                            </Grid>
-                        </Border>
-                    </Grid>
+                                            <Button
+                                                Text="Excluir"
+                                                Clicked="ExcluirPeriodo"
+                                                CommandParameter="{Binding .}"
+                                                BackgroundColor="Red"
+                                                TextColor="White"
+                                                CornerRadius="10" />
 
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
+                                        </HorizontalStackLayout>
 
-        </CollectionView>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </Grid>
 
-        <Button
-            Grid.Row="4"
-            Text="+ Inserir"
-            Clicked="AbrirInserirPeriodo"
-            BackgroundColor="Green"
-            TextColor="White"
-            CornerRadius="10" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
 
-    </Grid>
-        
+            </CollectionView>
+
+            <Button
+                Grid.Row="4"
+                Text="+ Inserir"
+                Clicked="AbrirInserirPeriodo"
+                BackgroundColor="Green"
+                TextColor="White"
+                CornerRadius="10" />
+
+        </Grid>
+
         <local:PopupConfirmacao x:Name="popup" />
 
     </Grid>

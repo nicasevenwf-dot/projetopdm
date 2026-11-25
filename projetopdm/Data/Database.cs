@@ -12,7 +12,7 @@ public class Database
     {
         string caminhoBanco = Path.Combine(
             FileSystem.AppDataDirectory,
-            "academico.db3"
+            "academico_v2.db3"
         );
 
         _database = new SQLiteAsyncConnection(caminhoBanco);
@@ -48,7 +48,9 @@ public class Database
         texto ??= string.Empty;
 
         return await _database.Table<Periodo>()
-            .Where(p => p.PerNome.Contains(texto) || p.PerSigla.Contains(texto))
+            .Where(p => p.PerNome.Contains(texto)
+                     || p.PerSigla.Contains(texto)
+                     || p.PerData.Contains(texto))
             .ToListAsync();
     }
 

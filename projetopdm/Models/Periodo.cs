@@ -12,4 +12,7 @@ public class Periodo
 
     [MaxLength(5)]
     public string PerSigla { get; set; } = string.Empty;
+
+    [MaxLength(20)]
+    public string PerData { get; set; } = string.Empty;
 }

@@ -50,10 +50,7 @@
                     HorizontalOptions="Center"
                     Spacing="8"
                     Margin="0,40">
-                    <Label
-                        Text="📚"
-                        FontSize="48"
-                        HorizontalOptions="Center" />
+                    
                     <Label
                         Text="Nenhum curso cadastrado ainda."
                         FontSize="16"

@@ -21,6 +21,7 @@ public partial class AltPeriodoPage : ContentPage
 
             txtNome.Text = value.PerNome;
             txtSigla.Text = value.PerSigla;
+            txtData.Text = value.PerData;   // NOVO
         }
     }
 
@@ -57,8 +58,15 @@ public partial class AltPeriodoPage : ContentPage
             return;
         }
 
+        if (string.IsNullOrWhiteSpace(txtData.Text))
+        {
+            await Aviso("Digite a data do período.");
+            return;
+        }
+
         _periodoSelecionado.PerNome = txtNome.Text;
         _periodoSelecionado.PerSigla = txtSigla.Text;
+        _periodoSelecionado.PerData = txtData.Text;   // NOVO
 
         await _database.AlterarPeriodo(_periodoSelecionado);
 

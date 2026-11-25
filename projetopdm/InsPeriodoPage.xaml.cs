@@ -40,10 +40,17 @@ public partial class InsPeriodoPage : ContentPage
             return;
         }
 
+        if (string.IsNullOrWhiteSpace(txtData.Text))
+        {
+            await Aviso("Digite a data do período.");
+            return;
+        }
+
         Periodo periodo = new Periodo
         {
             PerNome = txtNome.Text,
-            PerSigla = txtSigla.Text
+            PerSigla = txtSigla.Text,
+            PerData = txtData.Text
         };
 
         await _database.InserirPeriodo(periodo);
