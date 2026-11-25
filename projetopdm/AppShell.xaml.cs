@@ -7,29 +7,32 @@
             InitializeComponent();
 
             Routing.RegisterRoute(
-            "InsPeriodoPage",
-            typeof(InsPeriodoPage)
-        );
+                "InsPeriodoPage",
+                typeof(InsPeriodoPage)
+            );
             Routing.RegisterRoute(
-            "AltPeriodoPage",
-            typeof(AltPeriodoPage)
-);
+                "AltPeriodoPage",
+                typeof(AltPeriodoPage)
+            );
             Routing.RegisterRoute(
-            "InsCursoPage",
-            typeof(InsCursoPage)
-);
+                "InsCursoPage",
+                typeof(InsCursoPage)
+            );
             Routing.RegisterRoute(
-            "AltCursoPage",
-            typeof(AltCursoPage)
-);
-
+                "AltCursoPage",
+                typeof(AltCursoPage)
+            );
             Routing.RegisterRoute(
-            "InsDisciplinaPage",
-            typeof(InsDisciplinaPage)
-);
+                "InsDisciplinaPage",
+                typeof(InsDisciplinaPage)
+            );
             Routing.RegisterRoute(
-            "AltDisciplinaPage",
-            typeof(AltDisciplinaPage)
+                "AltDisciplinaPage",
+                typeof(AltDisciplinaPage)
+            );
+            Routing.RegisterRoute(
+                "Sobre",
+                typeof(Sobre)
             );
         }
     }

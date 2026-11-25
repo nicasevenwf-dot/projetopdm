@@ -23,49 +23,41 @@ public partial class InsCursoPage : ContentPage
         pickerPeriodo.ItemsSource = periodos;
     }
 
+    private Task Aviso(string mensagem)
+    {
+        return popup.MostrarAsync(
+            "Atenção",
+            mensagem,
+            "OK",
+            null,
+            "⚠️",
+            Colors.DarkOrange
+        );
+    }
+
     private async void InserirCurso(object sender, EventArgs e)
     {
         if (string.IsNullOrWhiteSpace(txtNome.Text))
         {
-            await DisplayAlertAsync(
-                "Atenção",
-                "Digite o nome do curso.",
-                "OK"
-            );
-
+            await Aviso("Digite o nome do curso.");
             return;
         }
 
         if (string.IsNullOrWhiteSpace(txtSigla.Text))
         {
-            await DisplayAlertAsync(
-                "Atenção",
-                "Digite a sigla do curso.",
-                "OK"
-            );
-
+            await Aviso("Digite a sigla do curso.");
             return;
         }
 
         if (pickerPeriodo.SelectedItem == null)
         {
-            await DisplayAlertAsync(
-                "Atenção",
-                "Selecione um período.",
-                "OK"
-            );
-
+            await Aviso("Selecione um período.");
             return;
         }
 
         if (string.IsNullOrWhiteSpace(txtObservacoes.Text))
         {
-            await DisplayAlertAsync(
-                "Atenção",
-                "Digite as observações.",
-                "OK"
-            );
-
+            await Aviso("Digite as observações.");
             return;
         }
 
@@ -82,10 +74,13 @@ public partial class InsCursoPage : ContentPage
 
         await _database.InserirCurso(curso);
 
-        await DisplayAlertAsync(
+        await popup.MostrarAsync(
             "Sucesso",
             "Curso cadastrado com sucesso!",
-            "OK"
+            "OK",
+            null,
+            "✅",
+            Colors.Green
         );
 
         await Shell.Current.GoToAsync("..");

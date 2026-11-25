@@ -14,6 +14,9 @@ public partial class AltPeriodoPage : ContentPage
     {
         set
         {
+            if (value == null)
+                return;
+
             _periodoSelecionado = value;
 
             txtNome.Text = value.PerNome;
@@ -28,27 +31,29 @@ public partial class AltPeriodoPage : ContentPage
         _database = new Database();
     }
 
+    private Task Aviso(string mensagem)
+    {
+        return popup.MostrarAsync(
+            "Atenção",
+            mensagem,
+            "OK",
+            null,
+            "⚠️",
+            Colors.DarkOrange
+        );
+    }
+
     private async void AlterarPeriodo(object sender, EventArgs e)
     {
         if (string.IsNullOrWhiteSpace(txtNome.Text))
         {
-            await DisplayAlertAsync(
-                "Atenção",
-                "Digite o nome do período.",
-                "OK"
-            );
-
+            await Aviso("Digite o nome do período.");
             return;
         }
 
         if (string.IsNullOrWhiteSpace(txtSigla.Text))
         {
-            await DisplayAlertAsync(
-                "Atenção",
-                "Digite a sigla do período.",
-                "OK"
-            );
-
+            await Aviso("Digite a sigla do período.");
             return;
         }
 
@@ -57,10 +62,13 @@ public partial class AltPeriodoPage : ContentPage
 
         await _database.AlterarPeriodo(_periodoSelecionado);
 
-        await DisplayAlertAsync(
+        await popup.MostrarAsync(
             "Sucesso",
             "Período alterado com sucesso!",
-            "OK"
+            "OK",
+            null,
+            "✅",
+            Colors.Green
         );
 
         await Shell.Current.GoToAsync("..");

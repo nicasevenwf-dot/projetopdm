@@ -4,18 +4,141 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="projetopdm.MainPage"
-    Title="Home">
+    Title="Home"
+    BackgroundColor="#F4F6FB">
 
-    <VerticalStackLayout
-        Padding="30"
-        Spacing="20">
+    <Grid
+        Padding="24,20"
+        RowSpacing="16"
+        RowDefinitions="Auto,Auto,*">
 
+        <!-- Cabeçalho -->
+        <VerticalStackLayout Grid.Row="0" Spacing="4" HorizontalOptions="Center">
+            
+            <Label
+                Text="Sistema Acadêmico"
+                FontSize="28"
+                FontAttributes="Bold"
+                TextColor="#1F2A44"
+                HorizontalOptions="Center" />
+            <Label
+                Text="Gerencie seus cursos de forma simples"
+                FontSize="14"
+                TextColor="#6B7280"
+                HorizontalOptions="Center" />
+        </VerticalStackLayout>
+
+        <!-- Título da seção -->
         <Label
-            Text="Sistema Acadêmico"
-            FontSize="28"
+            Grid.Row="1"
+            Text="Cursos cadastrados"
+            FontSize="18"
             FontAttributes="Bold"
-            HorizontalOptions="Center" />
+            TextColor="#1F2A44" />
 
-    </VerticalStackLayout>
+        
+
+        <!-- Lista -->
+        <CollectionView
+            Grid.Row="2"
+            x:Name="listaCursos"
+            SelectionMode="None">
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Spacing="8"
+                    Margin="0,40">
+                    <Label
+                        Text="📚"
+                        FontSize="48"
+                        HorizontalOptions="Center" />
+                    <Label
+                        Text="Nenhum curso cadastrado ainda."
+                        FontSize="16"
+                        TextColor="#6B7280"
+                        HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+
+                    <Grid Padding="0,6">
+
+                        <Border
+                            BackgroundColor="White"
+                            Stroke="#E5E7EB"
+                            StrokeThickness="1"
+                            Padding="0">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="14" />
+                            </Border.StrokeShape>
+
+                            <Border.Shadow>
+                                <Shadow
+                                    Brush="Black"
+                                    Opacity="0.08"
+                                    Radius="8"
+                                    Offset="0,3" />
+                            </Border.Shadow>
+
+                            <Grid ColumnDefinitions="6,*">
+
+                                <!-- Faixa colorida lateral -->
+                                <BoxView
+                                    Grid.Column="0"
+                                    Color="#4F46E5" />
+
+                                <VerticalStackLayout
+                                    Grid.Column="1"
+                                    Padding="16,14"
+                                    Spacing="6">
+
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <Label
+                                            Grid.Column="0"
+                                            Text="{Binding CurNome}"
+                                            FontSize="18"
+                                            FontAttributes="Bold"
+                                            TextColor="#1F2A44"
+                                            LineBreakMode="TailTruncation"
+                                            VerticalOptions="Center" />
+
+                                        <Border
+                                            Grid.Column="1"
+                                            BackgroundColor="#EEF2FF"
+                                            StrokeThickness="0"
+                                            Padding="10,4"
+                                            VerticalOptions="Center">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="10" />
+                                            </Border.StrokeShape>
+                                            <Label
+                                                Text="{Binding CurSigla}"
+                                                FontSize="12"
+                                                FontAttributes="Bold"
+                                                TextColor="#4F46E5" />
+                                        </Border>
+                                    </Grid>
+
+                                    <Label
+                                        Text="{Binding CurObservacoes}"
+                                        FontSize="14"
+                                        TextColor="#6B7280" />
+
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </Grid>
 
 </ContentPage>

@@ -23,49 +23,41 @@ public partial class InsDisciplinaPage : ContentPage
         pickerCurso.ItemsSource = cursos;
     }
 
+    private Task Aviso(string mensagem)
+    {
+        return popup.MostrarAsync(
+            "Atenção",
+            mensagem,
+            "OK",
+            null,
+            "⚠️",
+            Colors.DarkOrange
+        );
+    }
+
     private async void InserirDisciplina(object sender, EventArgs e)
     {
         if (string.IsNullOrWhiteSpace(txtNome.Text))
         {
-            await DisplayAlertAsync(
-                "Atenção",
-                "Digite o nome da disciplina.",
-                "OK"
-            );
-
+            await Aviso("Digite o nome da disciplina.");
             return;
         }
 
         if (string.IsNullOrWhiteSpace(txtSigla.Text))
         {
-            await DisplayAlertAsync(
-                "Atenção",
-                "Digite a sigla da disciplina.",
-                "OK"
-            );
-
+            await Aviso("Digite a sigla da disciplina.");
             return;
         }
 
         if (pickerCurso.SelectedItem == null)
         {
-            await DisplayAlertAsync(
-                "Atenção",
-                "Selecione um curso.",
-                "OK"
-            );
-
+            await Aviso("Selecione um curso.");
             return;
         }
 
         if (string.IsNullOrWhiteSpace(txtObservacoes.Text))
         {
-            await DisplayAlertAsync(
-                "Atenção",
-                "Digite as observações.",
-                "OK"
-            );
-
+            await Aviso("Digite as observações.");
             return;
         }
 
@@ -82,10 +74,13 @@ public partial class InsDisciplinaPage : ContentPage
 
         await _database.InserirDisciplina(disciplina);
 
-        await DisplayAlertAsync(
+        await popup.MostrarAsync(
             "Sucesso",
             "Disciplina cadastrada com sucesso!",
-            "OK"
+            "OK",
+            null,
+            "✅",
+            Colors.Green
         );
 
         await Shell.Current.GoToAsync("..");

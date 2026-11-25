@@ -21,9 +21,18 @@ public partial class PeriodosPage : ContentPage
         await CarregarPeriodos();
     }
 
+    private async void OnPesquisarTextChanged(object sender, EventArgs e)
+    {
+        await CarregarPeriodos();
+    }
+
     private async Task CarregarPeriodos()
     {
-        List<Periodo> periodos = await _database.ListarPeriodos();
+        string texto = searchBar.Text ?? string.Empty;
+
+        List<Periodo> periodos = string.IsNullOrWhiteSpace(texto)
+            ? await _database.ListarPeriodos()
+            : await _database.PesquisarPeriodos(texto);
 
         listaPeriodos.ItemsSource = periodos;
     }
@@ -43,7 +52,7 @@ public partial class PeriodosPage : ContentPage
             "AltPeriodoPage",
             new Dictionary<string, object>
             {
-            { "Periodo", periodo }
+                { "Periodo", periodo }
             }
         );
     }
@@ -54,24 +63,41 @@ public partial class PeriodosPage : ContentPage
 
         Periodo periodo = (Periodo)botao.CommandParameter;
 
-        bool confirmar = await DisplayAlertAsync(
+        bool confirmar = await popup.MostrarAsync(
             "Excluir período",
             $"Deseja realmente excluir {periodo.PerNome}?",
             "Excluir",
             "Cancelar"
         );
 
-        if (confirmar)
+        if (!confirmar)
+            return;
+
+        int resultado = await _database.ExcluirPeriodo(periodo);
+
+        if (resultado == 0)
         {
-            await _database.ExcluirPeriodo(periodo);
-
-            await CarregarPeriodos();
-
-            await DisplayAlertAsync(
-                "Sucesso",
-                "Período excluído com sucesso!",
-                "OK"
+            await popup.MostrarAsync(
+                "Atenção",
+                "Não é possível excluir: existem cursos vinculados a este período.",
+                "OK",
+                null,
+                "⚠️",
+                Colors.DarkOrange
             );
+
+            return;
         }
+
+        await CarregarPeriodos();
+
+        await popup.MostrarAsync(
+            "Sucesso",
+            "Período excluído com sucesso!",
+            "OK",
+            null,
+            "✅",
+            Colors.Green
+        );
     }
 }

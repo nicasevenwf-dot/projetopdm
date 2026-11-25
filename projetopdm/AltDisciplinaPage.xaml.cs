@@ -13,6 +13,9 @@ public partial class AltDisciplinaPage : ContentPage
     {
         set
         {
+            if (value == null)
+                return;
+
             _disciplinaSelecionada = value;
 
             txtNome.Text = value.DisNome;
@@ -46,49 +49,41 @@ public partial class AltDisciplinaPage : ContentPage
         }
     }
 
+    private Task Aviso(string mensagem)
+    {
+        return popup.MostrarAsync(
+            "Atenção",
+            mensagem,
+            "OK",
+            null,
+            "⚠️",
+            Colors.DarkOrange
+        );
+    }
+
     private async void AlterarDisciplina(object sender, EventArgs e)
     {
         if (string.IsNullOrWhiteSpace(txtNome.Text))
         {
-            await DisplayAlertAsync(
-                "Atenção",
-                "Digite o nome da disciplina.",
-                "OK"
-            );
-
+            await Aviso("Digite o nome da disciplina.");
             return;
         }
 
         if (string.IsNullOrWhiteSpace(txtSigla.Text))
         {
-            await DisplayAlertAsync(
-                "Atenção",
-                "Digite a sigla da disciplina.",
-                "OK"
-            );
-
+            await Aviso("Digite a sigla da disciplina.");
             return;
         }
 
         if (pickerCurso.SelectedItem == null)
         {
-            await DisplayAlertAsync(
-                "Atenção",
-                "Selecione um curso.",
-                "OK"
-            );
-
+            await Aviso("Selecione um curso.");
             return;
         }
 
         if (string.IsNullOrWhiteSpace(txtObservacoes.Text))
         {
-            await DisplayAlertAsync(
-                "Atenção",
-                "Digite as observações.",
-                "OK"
-            );
-
+            await Aviso("Digite as observações.");
             return;
         }
 
@@ -104,10 +99,13 @@ public partial class AltDisciplinaPage : ContentPage
             _disciplinaSelecionada
         );
 
-        await DisplayAlertAsync(
+        await popup.MostrarAsync(
             "Sucesso",
             "Disciplina alterada com sucesso!",
-            "OK"
+            "OK",
+            null,
+            "✅",
+            Colors.Green
         );
 
         await Shell.Current.GoToAsync("..");

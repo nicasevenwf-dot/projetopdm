@@ -14,27 +14,29 @@ public partial class InsPeriodoPage : ContentPage
         _database = new Database();
     }
 
+    private Task Aviso(string mensagem)
+    {
+        return popup.MostrarAsync(
+            "Atenção",
+            mensagem,
+            "OK",
+            null,
+            "⚠️",
+            Colors.DarkOrange
+        );
+    }
+
     private async void InserirPeriodo(object sender, EventArgs e)
     {
         if (string.IsNullOrWhiteSpace(txtNome.Text))
         {
-            await DisplayAlertAsync(
-                "Atenção",
-                "Digite o nome do período.",
-                "OK"
-            );
-
+            await Aviso("Digite o nome do período.");
             return;
         }
 
         if (string.IsNullOrWhiteSpace(txtSigla.Text))
         {
-            await DisplayAlertAsync(
-                "Atenção",
-                "Digite a sigla do período.",
-                "OK"
-            );
-
+            await Aviso("Digite a sigla do período.");
             return;
         }
 
@@ -46,10 +48,13 @@ public partial class InsPeriodoPage : ContentPage
 
         await _database.InserirPeriodo(periodo);
 
-        await DisplayAlertAsync(
+        await popup.MostrarAsync(
             "Sucesso",
             "Período cadastrado com sucesso!",
-            "OK"
+            "OK",
+            null,
+            "✅",
+            Colors.Green
         );
 
         await Shell.Current.GoToAsync("..");

@@ -6,96 +6,125 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:projetopdm"
     Title="projetopdm"
-    FlyoutBehavior="Flyout">
+    FlyoutBehavior="Flyout"
+    Shell.BackgroundColor="#F4F6FB"
+    Shell.ForegroundColor="Black"
+    Shell.TitleColor="Black"
+    Shell.FlyoutBackgroundColor="#F4F6FB"
+    Shell.TabBarBackgroundColor="#F4F6FB"
+    Shell.TabBarForegroundColor="Black"
+    Shell.TabBarTitleColor="Black"
+    Shell.TabBarUnselectedColor="#5A6072">
+
+    <!-- ITENS DO MENU: texto e ícones pretos -->
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid
+                ColumnDefinitions="Auto,*"
+                Padding="16,12"
+                ColumnSpacing="16">
+
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="#F4F6FB" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="#E3E7F5" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+
+                <Image
+                    Source="{Binding FlyoutIcon}"
+                    VerticalOptions="Center"
+                    HeightRequest="24"
+                    WidthRequest="24" />
+
+                <Label
+                    Grid.Column="1"
+                    Text="{Binding Title}"
+                    TextColor="Black"
+                    FontSize="16"
+                    VerticalOptions="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
 
     <!-- HEADER DO FLYOUT -->
     <Shell.FlyoutHeader>
-        <Grid
-            Padding="20"
-            HeightRequest="120">
-
-            <VerticalStackLayout
-                VerticalOptions="Center">
-
+        <Grid Padding="20" HeightRequest="120" BackgroundColor="#4F46E5">
+            <VerticalStackLayout VerticalOptions="Center">
                 <Label
                     Text="Sistema Acadêmico"
                     FontSize="22"
-                    FontAttributes="Bold" />
-
+                    FontAttributes="Bold"
+                    TextColor="#F4F6FB" />
                 <Label
                     Text="Menu de opções"
-                    FontSize="14" />
-
+                    FontSize="14"
+                    TextColor="#F4F6FB" />
             </VerticalStackLayout>
-
         </Grid>
     </Shell.FlyoutHeader>
-
 
     <!-- FUNCIONALIDADES -->
     <FlyoutItem
         Title="Sistema Acadêmico"
         FlyoutDisplayOptions="AsMultipleItems">
 
-        <Tab
-            Title="Home"
-            Icon="home.png">
-
+        <Tab Title="Home" Icon="home.png">
             <ShellContent
                 Title="Home"
                 ContentTemplate="{DataTemplate local:MainPage}"
                 Route="MainPage" />
-
         </Tab>
 
-        <Tab
-            Title="Períodos"
-            Icon="periodo.png">
-
+        <Tab Title="Períodos" Icon="calendar.png">
             <ShellContent
                 Title="Períodos"
                 ContentTemplate="{DataTemplate local:PeriodosPage}"
                 Route="PeriodosPage" />
-
         </Tab>
 
-        <Tab
-            Title="Cursos"
-            Icon="cursos.png">
-
+        <Tab Title="Cursos" Icon="capelo.png">
             <ShellContent
                 Title="Cursos"
                 ContentTemplate="{DataTemplate local:CursosPage}"
                 Route="CursosPage" />
-
         </Tab>
 
-        <Tab
-            Title="Disciplinas"
-            Icon="disciplinas.png">
-
+        <Tab Title="Disciplinas" Icon="disciplinass.png">
             <ShellContent
                 Title="Disciplinas"
                 ContentTemplate="{DataTemplate local:DisciplinasPage}"
                 Route="DisciplinasPage" />
+        </Tab>
 
+        <Tab Title="Sobre" Icon="sobre.png">
+            <ShellContent
+                Title="Sobre"
+                ContentTemplate="{DataTemplate local:Sobre}"
+                Route="Sobre" />
         </Tab>
 
     </FlyoutItem>
 
-
     <!-- FOOTER DO FLYOUT -->
     <Shell.FlyoutFooter>
-        <Grid
-            Padding="20"
-            HeightRequest="70">
-
+        <Grid Padding="20" HeightRequest="70">
             <Label
                 Text="2508510 • 2026"
                 FontSize="12"
+                TextColor="Black"
                 HorizontalOptions="Center"
                 VerticalOptions="Center" />
-
         </Grid>
     </Shell.FlyoutFooter>
 

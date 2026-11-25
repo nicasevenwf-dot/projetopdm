@@ -3,106 +3,174 @@
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:projetopdm"
     x:Class="projetopdm.AltCursoPage"
-    Title="Alterar Curso">
+    Title="Alterar Curso"
+    BackgroundColor="White">
 
-    <ScrollView>
+    <Grid>
 
-        <VerticalStackLayout
-            Padding="30"
-            Spacing="15">
+        <ScrollView>
 
-            <Label
-                Text="ALTERAR CURSO"
-                FontSize="24"
-                FontAttributes="Bold"
-                HorizontalOptions="Center"
-                Margin="0,10,0,20" />
+            <VerticalStackLayout
+                Padding="24,20"
+                Spacing="12">
 
-            <!-- NOME -->
+                <Label
+                    Text="ALTERAR CURSO"
+                    FontSize="26"
+                    FontAttributes="Bold"
+                    TextColor="#1F2A44"
+                    HorizontalOptions="Center"
+                    Margin="0,10,0,16" />
 
-            <Label
-                Text="Nome"
-                FontAttributes="Bold" />
+                <!-- NOME -->
+                <Label
+                    Text="Nome"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    TextColor="#1F2A44" />
 
-            <Border
-                Stroke="LightGray"
-                StrokeThickness="1"
-                Padding="5">
+                <Border
+                    BackgroundColor="White"
+                    Stroke="#E5E7EB"
+                    StrokeThickness="1"
+                    Padding="10,2">
 
-                <Entry
-                    x:Name="txtNome"
-                    Placeholder="Nome do curso" />
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
 
-            </Border>
+                    <Border.Shadow>
+                        <Shadow
+                            Brush="Black"
+                            Opacity="0.08"
+                            Radius="8"
+                            Offset="0,3" />
+                    </Border.Shadow>
 
+                    <Entry
+                        x:Name="txtNome"
+                        Placeholder="Nome do curso"
+                        TextColor="#1F2A44"
+                        PlaceholderColor="#9CA3AF" />
+                </Border>
 
-            <!-- SIGLA -->
+                <!-- SIGLA -->
+                <Label
+                    Text="Sigla"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    TextColor="#1F2A44"
+                    Margin="0,8,0,0" />
 
-            <Label
-                Text="Sigla"
-                FontAttributes="Bold"
-                Margin="0,10,0,0" />
+                <Border
+                    BackgroundColor="White"
+                    Stroke="#E5E7EB"
+                    StrokeThickness="1"
+                    Padding="10,2">
 
-            <Border
-                Stroke="LightGray"
-                StrokeThickness="1"
-                Padding="5">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
 
-                <Entry
-                    x:Name="txtSigla"
-                    Placeholder="Sigla do curso" />
+                    <Border.Shadow>
+                        <Shadow
+                            Brush="Black"
+                            Opacity="0.08"
+                            Radius="8"
+                            Offset="0,3" />
+                    </Border.Shadow>
 
-            </Border>
+                    <Entry
+                        x:Name="txtSigla"
+                        Placeholder="Sigla do curso"
+                        TextColor="#1F2A44"
+                        PlaceholderColor="#9CA3AF" />
+                </Border>
 
+                <!-- PERÍODO -->
+                <Label
+                    Text="Período"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    TextColor="#1F2A44"
+                    Margin="0,8,0,0" />
 
-            <!-- PERÍODO -->
+                <Border
+                    BackgroundColor="White"
+                    Stroke="#E5E7EB"
+                    StrokeThickness="1"
+                    Padding="10,2">
 
-            <Label
-                Text="Período"
-                FontAttributes="Bold"
-                Margin="0,10,0,0" />
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
 
-            <Border
-                Stroke="LightGray"
-                StrokeThickness="1"
-                Padding="5">
+                    <Border.Shadow>
+                        <Shadow
+                            Brush="Black"
+                            Opacity="0.08"
+                            Radius="8"
+                            Offset="0,3" />
+                    </Border.Shadow>
 
-                <Picker
-    x:Name="pickerPeriodo"
-    Title="Selecione o período"
-    ItemDisplayBinding="{Binding PerNome}" />
+                    <Picker
+                        x:Name="pickerPeriodo"
+                        Title="Selecione o período"
+                        TitleColor="#9CA3AF"
+                        TextColor="#1F2A44"
+                        ItemDisplayBinding="{Binding PerNome}" />
+                </Border>
 
-            </Border>
+                <!-- OBSERVAÇÕES -->
+                <Label
+                    Text="Observações"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    TextColor="#1F2A44"
+                    Margin="0,8,0,0" />
 
+                <Border
+                    BackgroundColor="White"
+                    Stroke="#E5E7EB"
+                    StrokeThickness="1"
+                    Padding="10,2">
 
-            <!-- OBSERVAÇÕES -->
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="14" />
+                    </Border.StrokeShape>
 
-            <Label
-                Text="Observações"
-                FontAttributes="Bold"
-                Margin="0,10,0,0" />
+                    <Border.Shadow>
+                        <Shadow
+                            Brush="Black"
+                            Opacity="0.08"
+                            Radius="8"
+                            Offset="0,3" />
+                    </Border.Shadow>
 
-            <Border
-                Stroke="LightGray"
-                StrokeThickness="1"
-                Padding="5">
+                    <Editor
+                        x:Name="txtObservacoes"
+                        Placeholder="Observações do curso"
+                        PlaceholderColor="#9CA3AF"
+                        TextColor="#1F2A44"
+                        HeightRequest="100" />
+                </Border>
 
-                <Editor
-                    x:Name="txtObservacoes"
-                    Placeholder="Observações do curso"
-                    HeightRequest="100" />
+                <Button
+                    Text="SALVAR ALTERAÇÕES"
+                    Margin="0,20,0,0"
+                    Clicked="AlterarCurso"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    CornerRadius="10" />
 
-            </Border>
+            </VerticalStackLayout>
 
+        </ScrollView>
 
-            <Button
-                Text="SALVAR ALTERAÇÕES"
-                Margin="0,20,0,0"
-                Clicked="AlterarCurso" />
+        <local:PopupConfirmacao x:Name="popup" />
 
-        </VerticalStackLayout>
-
-    </ScrollView>
+    </Grid>
 
 </ContentPage>

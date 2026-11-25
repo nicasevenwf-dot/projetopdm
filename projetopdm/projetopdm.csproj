@@ -72,6 +72,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="PopupConfirmacao.xaml.cs">
+	    <DependentUpon>PopupConfirmacao.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="AltCursoPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -96,7 +102,13 @@
 	  <MauiXaml Update="InsPeriodoPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="PopupConfirmacao.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="PeriodosPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Sobre.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

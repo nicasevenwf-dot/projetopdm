@@ -21,10 +21,18 @@ public partial class DisciplinasPage : ContentPage
         await CarregarDisciplinas();
     }
 
+    private async void OnPesquisarTextChanged(object sender, EventArgs e)
+    {
+        await CarregarDisciplinas();
+    }
+
     private async Task CarregarDisciplinas()
     {
-        List<Disciplina> disciplinas =
-            await _database.ListarDisciplinas();
+        string texto = searchBar.Text ?? string.Empty;
+
+        List<Disciplina> disciplinas = string.IsNullOrWhiteSpace(texto)
+            ? await _database.ListarDisciplinas()
+            : await _database.PesquisarDisciplinas(texto);
 
         listaDisciplinas.ItemsSource = disciplinas;
     }
@@ -38,14 +46,13 @@ public partial class DisciplinasPage : ContentPage
     {
         Button botao = (Button)sender;
 
-        Disciplina disciplina =
-            (Disciplina)botao.CommandParameter;
+        Disciplina disciplina = (Disciplina)botao.CommandParameter;
 
         await Shell.Current.GoToAsync(
             "AltDisciplinaPage",
             new Dictionary<string, object>
             {
-            { "Disciplina", disciplina }
+                { "Disciplina", disciplina }
             }
         );
     }
@@ -54,27 +61,29 @@ public partial class DisciplinasPage : ContentPage
     {
         Button botao = (Button)sender;
 
-        Disciplina disciplina =
-            (Disciplina)botao.CommandParameter;
+        Disciplina disciplina = (Disciplina)botao.CommandParameter;
 
-        bool confirmar = await DisplayAlertAsync(
+        bool confirmar = await popup.MostrarAsync(
             "Excluir disciplina",
             $"Deseja realmente excluir {disciplina.DisNome}?",
             "Excluir",
             "Cancelar"
         );
 
-        if (confirmar)
-        {
-            await _database.ExcluirDisciplina(disciplina);
+        if (!confirmar)
+            return;
 
-            await CarregarDisciplinas();
+        await _database.ExcluirDisciplina(disciplina);
 
-            await DisplayAlertAsync(
-                "Sucesso",
-                "Disciplina excluída com sucesso!",
-                "OK"
-            );
-        }
+        await CarregarDisciplinas();
+
+        await popup.MostrarAsync(
+            "Sucesso",
+            "Disciplina excluída com sucesso!",
+            "OK",
+            null,
+            "✅",
+            Colors.Green
+        );
     }
 }

@@ -13,6 +13,9 @@ public partial class AltCursoPage : ContentPage
     {
         set
         {
+            if (value == null)
+                return;
+
             _cursoSelecionado = value;
 
             txtNome.Text = value.CurNome;
@@ -46,49 +49,41 @@ public partial class AltCursoPage : ContentPage
         }
     }
 
+    private Task Aviso(string mensagem)
+    {
+        return popup.MostrarAsync(
+            "Atenção",
+            mensagem,
+            "OK",
+            null,
+            "⚠️",
+            Colors.DarkOrange
+        );
+    }
+
     private async void AlterarCurso(object sender, EventArgs e)
     {
         if (string.IsNullOrWhiteSpace(txtNome.Text))
         {
-            await DisplayAlertAsync(
-                "Atenção",
-                "Digite o nome do curso.",
-                "OK"
-            );
-
+            await Aviso("Digite o nome do curso.");
             return;
         }
 
         if (string.IsNullOrWhiteSpace(txtSigla.Text))
         {
-            await DisplayAlertAsync(
-                "Atenção",
-                "Digite a sigla do curso.",
-                "OK"
-            );
-
+            await Aviso("Digite a sigla do curso.");
             return;
         }
 
         if (pickerPeriodo.SelectedItem == null)
         {
-            await DisplayAlertAsync(
-                "Atenção",
-                "Selecione um período.",
-                "OK"
-            );
-
+            await Aviso("Selecione um período.");
             return;
         }
 
         if (string.IsNullOrWhiteSpace(txtObservacoes.Text))
         {
-            await DisplayAlertAsync(
-                "Atenção",
-                "Digite as observações.",
-                "OK"
-            );
-
+            await Aviso("Digite as observações.");
             return;
         }
 
@@ -102,10 +97,13 @@ public partial class AltCursoPage : ContentPage
 
         await _database.AlterarCurso(_cursoSelecionado);
 
-        await DisplayAlertAsync(
+        await popup.MostrarAsync(
             "Sucesso",
             "Curso alterado com sucesso!",
-            "OK"
+            "OK",
+            null,
+            "✅",
+            Colors.Green
         );
 
         await Shell.Current.GoToAsync("..");

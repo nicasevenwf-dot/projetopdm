@@ -1,3 +1,6 @@
 <Solution>
-  <Project Path="projetopdm/projetopdm.csproj" />
+  <Folder Name="/Itens de Solução/" />
+  <Project Path="projetopdm/projetopdm.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
 </Solution>
